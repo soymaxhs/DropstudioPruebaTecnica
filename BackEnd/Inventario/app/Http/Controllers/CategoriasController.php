@@ -40,7 +40,7 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorias $categoria_id)
+    public function show($categoria_id)
     {
         return Categorias::findOrFail($categoria_id);
     }
@@ -52,7 +52,7 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorias $categoria_id)
+    public function update(Request $request, $categoria_id)
     {
         $categoria = Categorias::findOrFail($categoria_id);
 
@@ -69,10 +69,12 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorias $categoria_id)
+    public function destroy($categoria_id)
     {
         $categoria = Categorias::findOrFail($categoria_id);
-        return $categoria->delete();
+        $categoria->productosCategorias()->delete();
+        $categoria->delete();
+        return response()->json(['message' => 'success'], 200);
     }
 
     public function getProductos($producto_id)
