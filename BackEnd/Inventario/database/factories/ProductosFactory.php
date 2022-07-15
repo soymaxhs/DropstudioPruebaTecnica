@@ -23,6 +23,7 @@ class ProductosFactory extends Factory
             'precio' => fake()->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL),
             'cantidad' => fake()->randomNumber($nbDigits = NULL, $strict = false),
             'estado' => fake()->boolean(),
+            'imagen' => fake()->imageUrl($width = 640, $height = 480),
         ];
     }
 }
